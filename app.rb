@@ -36,9 +36,10 @@ post '/visit' do
   @user_name  = params[:user_name]
   @phone      = params[:phone]
   @date_time  = params[:date_time]
+  @barber     = params[:barber]
 
   file = File.open('./Public/users.txt', 'a')
-  file.write "Имя пользователя: #{@user_name}, телефон: #{@phone}, время записи: #{@date_time};\n"
+  file.write "Имя пользователя: #{@user_name}, телефон: #{@phone}, время записи: #{@date_time}, ваш парикмахер - #{@barber};\n"
   file.close
 
   erb :visit
