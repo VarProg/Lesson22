@@ -32,7 +32,31 @@ get '/visit' do
   erb :visit
 end
 
+post '/visit' do
+  @user_name  = params[:user_name]
+  @phone      = params[:phone]
+  @date_time  = params[:date_time]
+
+  file = File.open('./Public/users.txt', 'a')
+  file.write "Имя пользователя: #{@user_name}, телефон: #{@phone}, время записи: #{@date_time};\n"
+  file.close
+
+  erb :visit
+end
+
 get '/contacts' do
+  erb :contacts
+end
+
+post '/contacts' do
+  @email    = params[:email]
+  @phone    = params[:phone]
+  @message  = params[:message]
+
+  file = File.open('./Public/contacts.txt', 'a')
+  file.write "Email: #{@email}, телефон: #{@phone}\nсообщение: #{@message}\n\n"
+  file.close
+
   erb :contacts
 end
 
