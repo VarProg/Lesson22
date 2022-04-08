@@ -66,9 +66,18 @@ get '/login/form' do
 end
 
 post '/login/attempt' do
-  session[:identity] = params['username']
-  where_user_came_from = session[:previous_url] || '/'
-  redirect to where_user_came_from
+  @login      = params[:login]
+  @password   = params[:password]
+
+  if @login == 'admin' && @password == 'secret'
+    session[:identity] = params['username']
+    where_user_came_from = session[:previous_url] || '/'
+    # redirect to where_user_came_from
+
+    erb "You are logged in!"
+  else 
+    erb "Wrong password or login!"
+  end
 end
 
 get '/logout' do
